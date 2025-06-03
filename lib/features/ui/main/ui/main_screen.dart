@@ -1,0 +1,72 @@
+// features/ui/main/ui/main_screen.dart
+import 'package:apiecommerse/features/ui/cart/ui/cart_screen.dart';
+import 'package:apiecommerse/features/ui/home/ui/home_screen.dart';
+import 'package:apiecommerse/features/logic/main/logic/main_cubit.dart';
+import 'package:apiecommerse/features/logic/main/logic/main_state.dart';
+import 'package:apiecommerse/features/ui/main/ui/widgets/bottom_navigation_bar.dart';
+import 'package:apiecommerse/features/ui/product/product_screen.dart';
+import 'package:apiecommerse/features/ui/search/ui/search_screen.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+class MainScreen extends StatefulWidget {
+  const MainScreen({super.key});
+
+  @override
+  State<MainScreen> createState() => _MainScreenState();
+}
+
+class _MainScreenState extends State<MainScreen> {
+  @override
+  void initState() {
+    BlocProvider.of<MainCubit>(context).setPageIndex = 0;
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<MainCubit, MainState>(
+      builder: (context, state) {
+        return state.maybeWhen(
+          setPageIndex: (index) {
+            return mainScafould(index);
+          },
+          orElse: () {
+            return pageList[0];
+          },
+        );
+      },
+    );
+  }
+}
+
+List<Widget> pageList = [
+  // MultiBlocProvider(
+  //   providers: [
+  //     BlocProvider(
+  //       create: (context) =>  HomeCubit(getIt()),
+  //     ),
+  //     BlocProvider(
+  //       create: (context) =>  HomeCategorysCubit(getIt()),
+  //     ),
+  //   ],
+  //   child: Container(),
+  // )
+  HomeScreen(),
+  SearchScreen(),
+  // BlocProvider(
+  //   create: (context) => HomeCubit(getIt()),
+  //   child: HomeScreen(),
+  // ),
+  HomeScreen(),
+
+  CartScreen(),
+  ProductScreen(),
+];
+
+Widget mainScafould(int index) {
+  return Scaffold(
+    bottomNavigationBar: ButtomNavigatioBar(index: index),
+    body: pageList[index],
+  );
+}
