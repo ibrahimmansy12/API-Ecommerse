@@ -6,7 +6,7 @@ import 'package:apiecommerse/core/theming/colors_manager.dart';
 import 'package:apiecommerse/core/theming/text_style.dart';
 import 'package:apiecommerse/features/data/home/data/model/prudact_model.dart';
 import 'package:apiecommerse/features/logic/categories%20and%20products/logic/products/home_cubit.dart';
-import 'package:apiecommerse/features/see%20all/ui/widgets/see_all_tap_bar_view_column.dart';
+import 'package:apiecommerse/features/ui/seeAll/ui/widgets/see_all_tap_bar_view_column.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
