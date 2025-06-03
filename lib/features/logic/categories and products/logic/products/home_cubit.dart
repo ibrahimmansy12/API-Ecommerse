@@ -1,6 +1,6 @@
-// features/home/logic/products/home_cubit.dart
+// features/logic/categories and products/logic/products/home_cubit.dart
 
-import 'package:apiecommerse/features/data/home/data/model/favorite_model.dart';
+import 'package:apiecommerse/features/data/home/data/model/categories_model.dart';
 import 'package:apiecommerse/features/data/home/data/model/prudact_model.dart';
 import 'package:apiecommerse/features/data/home/data/repo/home_repo.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -13,9 +13,29 @@ class HomeCubit extends Cubit<HomeState> {
   List<ProductDataDetails> allProductsList = [];
   List<ProductDataDetails> electronicsProductsList = [];
   List<ProductDataDetails> makeupProductsList = [];
+  
+  
+  List<CategoriesDatadetails>? categoriesDataList;
+
+
+
+  void getCategoriesList() async {
+  //  emit(HomeState.categoriesLoading());
+
+    final response = await homeRepo?.getCategories();
+    response?.when(success: (productsmodel) {
+      print(
+          "cat cu repo============>>>> ${productsmodel.categoriesDatadetails?[1].toString()}");
+
+      categoriesDataList = productsmodel.categoriesDatadetails ?? [];
+     emit(HomeState.categoriesSuccess(categoriesDataList));
+    }, failure: (error) {
+      emit(HomeState.categoriesError(error));
+    });
+  }
   void getAllProductsList() async {
     final response = await homeRepo?.getAllProducts();
-
+    emit(HomeState.productLoading());
     response?.when(success: (productsmodel) {
       allProductsList = productsmodel.productDataDetails ?? [];
     makeupProductsList=  fillProductsList( 2);
@@ -38,32 +58,32 @@ print("makeupProductsList============>>>> ${makeupProductsList.toString()}");
 return products;
   }
 
-  void getMakeupProducts() async {
-    final response = await homeRepo?.getProductsById(2);
-    emit(HomeState.categoriesByIdLoading());
-    response?.when(success: (productsmodel) {
-      electronicsProductsList = productsmodel.productDataDetails ?? [];
-      emit(HomeState.categoriesByIdSuccess(electronicsProductsList));
-    }, failure: (error) {
-      emit(HomeState.categoriesByIdError(error));
-    });
-  }
+  // void getMakeupProducts() async {
+  //   final response = await homeRepo?.getProductsById(2);
+  //   emit(HomeState.categoriesLoading());
+  //   response?.when(success: (productsmodel) {
+  //     electronicsProductsList = productsmodel.productDataDetails ?? [];
+  //    // emit(HomeState.categoriesSuccess(electronicsProductsList));
+  //   }, failure: (error) {
+  //     // emit(HomeState.(error));
+  //   });
+  // }
 
-  void getCategoriesDataById(int index) async {
-    final response = await homeRepo?.getProductsById(index);
-    emit(HomeState.categoriesByIdLoading());
-    response?.when(success: (productsmodel) {
-      electronicsProductsList = productsmodel.productDataDetails ?? [];
-      emit(HomeState.categoriesByIdSuccess(electronicsProductsList));
-    }, failure: (error) {
-      emit(HomeState.categoriesByIdError(error));
-    });
-  }
+  // void getCategoriesDataById(int index) async {
+  //   final response = await homeRepo?.getProductsById(index);
+  //   // emit(HomeState.categoriesByIdLoading());
+  //   response?.when(success: (productsmodel) {
+  //     electronicsProductsList = productsmodel.productDataDetails ?? [];
+  //     emit(HomeState.categoriesByIdSuccess(electronicsProductsList));
+  //   }, failure: (error) {
+  //     emit(HomeState.categoriesByIdError(error));
+  //   });
+  // }
 
-  void addToFavorite(FavoriteRequestModel favoriteRequestModel) async {
-    final response = await homeRepo?.addToFavorite(favoriteRequestModel);
-    response?.when(success: (productsmodel) {}, failure: (error) {});
-  }
+  // void addToFavorite(FavoriteRequestModel favoriteRequestModel) async {
+  //   final response = await homeRepo?.addToFavorite(favoriteRequestModel);
+  //   response?.when(success: (productsmodel) {}, failure: (error) {});
+  // }
 }
     // print("list ======================>>>>> ${productsDataList.toString()}");
 

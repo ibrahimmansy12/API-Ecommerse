@@ -6,12 +6,13 @@ import 'package:apiecommerse/core/helper/extention.dart';
 import 'package:apiecommerse/core/theming/colors_manager.dart';
 import 'package:apiecommerse/core/theming/text_style.dart';
 import 'package:apiecommerse/features/logic/categories%20and%20products/logic/categories/home_categorys_cubit.dart';
+import 'package:apiecommerse/features/logic/categories%20and%20products/logic/products/home_cubit.dart';
 import 'package:flutter/material.dart';
 
 // import 'package:flutter_bloc/flutter_bloc.dart';
 Widget homeTapBardetailsMethod(
     BuildContext context, TabController? controller) {
-  var inject = getIt<HomeCategorysCubit>();
+  var inject = getIt<HomeCubit>();
   print("=====>>>>${inject.categoriesDataList?[0].name}");
   if (inject.categoriesDataList.isNullOrEmpty()) {
     return Center(

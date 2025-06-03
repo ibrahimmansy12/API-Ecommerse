@@ -11,6 +11,8 @@ class HomeCategorysCubit extends Cubit<HomeCategorysState> {
 
   List<CategoriesDatadetails>? categoriesDataList;
 
+
+
   void getCategoriesList() async {
     emit(HomeCategorysState.categoriesLoading());
 

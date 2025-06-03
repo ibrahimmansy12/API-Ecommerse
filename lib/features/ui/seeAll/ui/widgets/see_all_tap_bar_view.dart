@@ -50,17 +50,17 @@ class SeeAllTapBarView extends StatelessWidget {
               ),
             );
           },
-          categoriesByIdLoading: () {
+          categoriesLoading: () {
             return Center(
               child: CircularProgressIndicator(
                 color: MyColorsManager.green,
               ),
             );
           },
-          categoriesByIdSuccess: (productData) {
+          categoriesSuccess: (productData) {
             return seeAllTapBarViewMethod(context, );
           },
-          categoriesByIdError: (error) {
+          categoriesError: (error) {
             return Center(
               child: Text(
                 'Error: $error',

@@ -11,16 +11,24 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sizer/sizer.dart';
 
-
-class HomeTapBarView extends StatelessWidget {
+class HomeTapBarView extends StatefulWidget {
   const HomeTapBarView({
     super.key,
-   // this.tabController,
+    // this.tabController,
   });
 
- // final TabController? tabController;
+  @override
+  State<HomeTapBarView> createState() => _HomeTapBarViewState();
+}
 
-  // @override
+class _HomeTapBarViewState extends State<HomeTapBarView> {
+  @override
+  void initState() {
+    getIt<HomeCubit>().getAllProductsList();
+    super.initState();
+  }
+
+  // final TabController? tabController;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -48,25 +56,26 @@ class HomeTapBarView extends StatelessWidget {
                   ),
                 );
               },
-              categoriesByIdLoading: () {
-                return Center(
-                  child: CircularProgressIndicator(
-                    color: MyColorsManager.green,
-                  ),
-                );
-              },
-              categoriesByIdSuccess: (productData) {
+              categoriesSuccess: (categoriesSuccess) {
                 return productRebuildMethod(context);
               },
-              categoriesByIdError: (error) {
+              categoriesError: (error) {
                 return Center(
                   child: Text(
                     'Error: $error',
                     style: MyTextStyles.font20blackSemiBold,
                   ),
                 );
+                // return productRebuildMethod(context);
               },
               initial: () {
+                return Center(
+                  child: CircularProgressIndicator(
+                    color: MyColorsManager.mainblue,
+                  ),
+                );
+              },
+              categoriesLoading: () {
                 return Center(
                   child: CircularProgressIndicator(
                     color: MyColorsManager.mainblue,
@@ -81,9 +90,10 @@ class HomeTapBarView extends StatelessWidget {
   }
 
   Widget productRebuildMethod(
-      BuildContext context, ) {
+    BuildContext context,
+  ) {
     var inject = getIt<HomeCubit>();
-   // List<CategoriesDataList>? categoriesDataList = inject.categoriesDataList;
+    // List<CategoriesDataList>? categoriesDataList = inject.categoriesDataList;
     return Container(
       height: 70.h,
       padding: EdgeInsets.only(top: 2.h, left: 5.w),
@@ -96,12 +106,12 @@ class HomeTapBarView extends StatelessWidget {
           ),
           HomeTapBarViewColumn(
             productDataList: inject.electronicsProductsList,
-          //  categoriesDataList: categoriesDataList,
+            //  categoriesDataList: categoriesDataList,
           ),
-        //   HomeTapBarViewColumn(
-        //     productDataList: productData,
-        //  //   categoriesDataList: categoriesDataList,
-        //   ),
+          //   HomeTapBarViewColumn(
+          //     productDataList: productData,
+          //  //   categoriesDataList: categoriesDataList,
+          //   ),
         ],
       ),
     );

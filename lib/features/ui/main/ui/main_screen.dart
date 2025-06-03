@@ -1,8 +1,8 @@
 // features/ui/main/ui/main_screen.dart
-import 'package:apiecommerse/features/ui/cart/ui/cart_screen.dart';
-import 'package:apiecommerse/features/ui/home/ui/home_screen.dart';
 import 'package:apiecommerse/features/logic/main/logic/main_cubit.dart';
 import 'package:apiecommerse/features/logic/main/logic/main_state.dart';
+import 'package:apiecommerse/features/ui/cart/ui/cart_screen.dart';
+import 'package:apiecommerse/features/ui/home/ui/home_screen.dart';
 import 'package:apiecommerse/features/ui/main/ui/widgets/bottom_navigation_bar.dart';
 import 'package:apiecommerse/features/ui/product/product_screen.dart';
 import 'package:apiecommerse/features/ui/search/ui/search_screen.dart';
@@ -41,25 +41,9 @@ class _MainScreenState extends State<MainScreen> {
 }
 
 List<Widget> pageList = [
-  // MultiBlocProvider(
-  //   providers: [
-  //     BlocProvider(
-  //       create: (context) =>  HomeCubit(getIt()),
-  //     ),
-  //     BlocProvider(
-  //       create: (context) =>  HomeCategorysCubit(getIt()),
-  //     ),
-  //   ],
-  //   child: Container(),
-  // )
   HomeScreen(),
   SearchScreen(),
-  // BlocProvider(
-  //   create: (context) => HomeCubit(getIt()),
-  //   child: HomeScreen(),
-  // ),
   HomeScreen(),
-
   CartScreen(),
   ProductScreen(),
 ];

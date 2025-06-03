@@ -2,7 +2,6 @@
 import 'package:apiecommerse/core/di/dependancy_ingection.dart';
 import 'package:apiecommerse/core/routing/routs.dart';
 import 'package:apiecommerse/features/data/home/data/model/prudact_model.dart';
-import 'package:apiecommerse/features/logic/categories%20and%20products/logic/categories/home_categorys_cubit.dart';
 import 'package:apiecommerse/features/logic/categories%20and%20products/logic/products/home_cubit.dart';
 import 'package:apiecommerse/features/logic/main/logic/main_cubit.dart';
 import 'package:apiecommerse/features/ui/main/ui/main_screen.dart';
@@ -25,8 +24,8 @@ class MyAppRouter {
       case ERouts.seeallscreen:
         return MaterialPageRoute(
           builder: (context) => BlocProvider.value(
-            value:getIt<HomeCategorysCubit>(),
-            child: SeeAllScreen(categoriesDataList:getIt<HomeCategorysCubit>().categoriesDataList??[],),
+            value:getIt<HomeCubit>(),
+            child: SeeAllScreen(categoriesDataList:getIt<HomeCubit>().categoriesDataList??[],),
           ),
         );
          case ERouts.productScreen:

@@ -1,11 +1,10 @@
 // features/ui/home/ui/home_screen.dart
 import 'package:apiecommerse/core/di/dependancy_ingection.dart';
 import 'package:apiecommerse/core/helper/constance_helper.dart';
-import 'package:apiecommerse/features/logic/categories%20and%20products/logic/categories/home_categorys_cubit.dart';
+import 'package:apiecommerse/features/logic/categories%20and%20products/logic/products/home_cubit.dart';
 import 'package:apiecommerse/features/ui/home/ui/widgets/home_stack.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -18,7 +17,6 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   @override
   void initState() {
     homeTabController = TabController(length: 2, vsync: this);
-// homeTabController?.index == seeAllTabController!.index;
 
     super.initState();
   }
@@ -29,10 +27,9 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
         body: SizedBox(
             height: double.infinity,
             child: BlocProvider.value(
-              value: getIt<HomeCategorysCubit>()..getCategoriesList(),
-                // create: (context) =>
-                //     HomeCategorysCubit(getIt())..getCategoriesList(),
-                child: homeStack(homeTabController!))));
+                value: getIt<HomeCubit>()..getCategoriesList(),
+             
+                child: HomeStack(tabController: homeTabController))));
   }
 }
 
