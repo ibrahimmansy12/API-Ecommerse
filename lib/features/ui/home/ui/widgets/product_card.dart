@@ -5,22 +5,36 @@ import 'package:apiecommerse/core/helper/extention.dart';
 import 'package:apiecommerse/core/routing/routs.dart';
 import 'package:apiecommerse/core/theming/colors_manager.dart';
 import 'package:apiecommerse/core/theming/text_style.dart';
+import 'package:apiecommerse/features/data/cart/data/cart_model.dart';
 import 'package:apiecommerse/features/data/home/data/model/prudact_model.dart';
+import 'package:apiecommerse/features/logic/favorites/favorites_cubit.dart';
+import 'package:apiecommerse/features/logic/favorites/favorites_state.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sizer/sizer.dart';
+
+import '../../../../../core/di/dependancy_ingection.dart';
 
 class ProductCard extends StatelessWidget {
   const ProductCard({
     super.key,
-    this.productDataDetails,
     this.height,
     this.width,
+    this.productDataDetails,
   });
   final double? height;
   final double? width;
   final ProductDataDetails? productDataDetails;
   @override
   Widget build(BuildContext context) {
+    ProductHiveModel? productHiveModel = ProductHiveModel(
+      id: productDataDetails?.id,
+      name: productDataDetails?.name ?? "",
+      description: productDataDetails?.description ?? "",
+      price: productDataDetails?.price,
+      image: productDataDetails?.image ?? "",
+      isFavorites: false,
+    );
     return Hero(
       tag: productDataDetails?.id ?? "productCard",
       child: GestureDetector(
@@ -47,16 +61,24 @@ class ProductCard extends StatelessWidget {
           child: Stack(
             children: [
               CardImage(productDataList: productDataDetails),
-              cardDescription(productDataDetails),
-              //  FavoriteIcon(productDataDetails: productDataList)
+              CardDescription(productDataList: productDataDetails),
+              FavoriteIcon(productHiveModel: productHiveModel)
             ],
           ),
         ),
       ),
     );
   }
+}
 
-  Positioned cardDescription(ProductDataDetails? productDataList) {
+class CardDescription extends StatelessWidget {
+  const CardDescription({
+    super.key,
+    this.productDataList,
+  });
+  final ProductDataDetails? productDataList;
+  @override
+  Widget build(BuildContext context) {
     return Positioned(
         top: 22.h,
         bottom: 2.w,
@@ -102,45 +124,89 @@ class ProductCard extends StatelessWidget {
   }
 }
 
-// class FavoriteIcon extends StatefulWidget {
-//   const FavoriteIcon({
-//     super.key,
-//     required this.productDataDetails,
-//   });
+class FavoriteIcon extends StatefulWidget {
+  const FavoriteIcon({
+    super.key,
+    required this.productHiveModel,
+    this.right,
+    this.top,
+    this.iconsSize,
+  });
+  final double? right;
+  final double? top;
+  final double? iconsSize;
+  final ProductHiveModel? productHiveModel;
 
-//   final ProductDataDetails? productDataDetails;
+  @override
+  State<FavoriteIcon> createState() => _FavoriteIconState();
+}
 
-//   @override
-//   State<FavoriteIcon> createState() => _FavoriteIconState();
-// }
+class _FavoriteIconState extends State<FavoriteIcon> {
+  @override
+  Widget build(BuildContext context) {
+    // var favoriteRequest = FavoriteRequestModel(
+    //   id: widget.cartCubit?.id,
+    // );
+    // var inject = getIt<FavoritesCubit>();
+    return BlocBuilder<FavoritesCubit, FavoritesState>(
+      builder: (context, state) {
+        if (state is Success) {
+          return favoriteIconBody(widget.right, widget.top, widget.iconsSize);
+        } else {
+          return favoriteIconBody(widget.right, widget.top, widget.iconsSize);
+        }
+      },
+    );
+  }
 
-// class _FavoriteIconState extends State<FavoriteIcon> {
-//   @override
-//   Widget build(BuildContext context) {
-//     var favoriteRequest = FavoriteRequestModel(
-//       id: widget.productDataDetails?.id,
-//     );
-//     var inject = getIt<HomeCubit>();
+  favoriteIconBody(double? right, double? top, double? iconSize) {
+    var inject = getIt<FavoritesCubit>();
+    return Positioned(
+        right: right ?? 2.8.w,
+        top: top ?? 0.55.w,
+        child: IconButton(
+            onPressed: () async {
+              if (inject.favoritesIdies.contains(widget.productHiveModel?.id)) {
+                print(
+                    "deleteed the list is ${inject.favoritBox.values.length}");
+                await inject.favoritBox.delete(widget.productHiveModel!.id);
+                inject.getfavoritesproducts();
+                setState(() {});
+              } else {
+                await inject.putToFavorite(widget.productHiveModel!);
+                inject.getfavoritesproducts();
+
+                setState(() {});
+              }
+            },
+            icon: Icon(
+              inject.favoritesIdies.contains(widget.productHiveModel?.id)
+                  ? Icons.favorite
+                  : Icons.favorite_border,
+              color: MyColorsManager.grey,
+              size: iconSize ?? 19.5.sp,
+            )));
+  }
+// Widget homeFavoritesIcon(inject) {
 //     return Positioned(
-//         right: 0.w,
-//         top: 0.w,
-//         child: IconButton(
-//             onPressed: () {
-//               inject.addToFavorite(favoriteRequest);
-//               setState(() {
-//                 widget.productDataDetails?.isFavorite =
-//                     !(widget.productDataDetails?.isFavorite ?? false);
-//               });
-//             },
-//             icon: Icon(
-//               widget.productDataDetails?.isFavorite == true
-//                   ? Icons.favorite
-//                   : Icons.favorite_border,
-//               color: MyColorsManager.grey,
-//             )));
+//       right: 0.w,
+//       top: 0.w,
+//       child: IconButton(
+//           onPressed: () {
+//              inject.(favoriteRequest);
+//             setState(() {
 
+//             });
+//           },
+//           icon: Icon(
+//             // widget.productHiveModel?.isFavorites == true
+//             //     ? Icons.favorite
+//             //     :
+//                 Icons.favorite_border,
+//             color: MyColorsManager.grey,
+//           )));
 //   }
-// }
+}
 
 class CardImage extends StatelessWidget {
   const CardImage({

@@ -46,7 +46,7 @@ class ButtomNavigatioBar extends StatelessWidget {
               onTap: () {
                 inject.setPageIndex = 2;
               },
-              icon: index == 2 ? Ionicons.add : Ionicons.add_circle_outline,
+              icon: index == 2 ? Ionicons.heart : Ionicons.heart_outline,
             ),
             BottomNavWidget(
               onTap: () {

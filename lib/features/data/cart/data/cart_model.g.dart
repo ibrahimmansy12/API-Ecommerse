@@ -6,17 +6,17 @@ part of 'cart_model.dart';
 // TypeAdapterGenerator
 // **************************************************************************
 
-class CartModelAdapter extends TypeAdapter<CartModel> {
+class ProductHiveModelAdapter extends TypeAdapter<ProductHiveModel> {
   @override
   final int typeId = 0;
 
   @override
-  CartModel read(BinaryReader reader) {
+  ProductHiveModel read(BinaryReader reader) {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return CartModel(
+    return ProductHiveModel(
       id: fields[0] as int?,
       name: fields[1] as String?,
       description: fields[2] as String?,
@@ -26,13 +26,14 @@ class CartModelAdapter extends TypeAdapter<CartModel> {
       createdAt: fields[6] as String?,
       updatedAt: fields[7] as String?,
       productcount: fields[8] as int?,
+      isFavorites: fields[9] as bool?,
     );
   }
 
   @override
-  void write(BinaryWriter writer, CartModel obj) {
+  void write(BinaryWriter writer, ProductHiveModel obj) {
     writer
-      ..writeByte(9)
+      ..writeByte(10)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -50,7 +51,9 @@ class CartModelAdapter extends TypeAdapter<CartModel> {
       ..writeByte(7)
       ..write(obj.updatedAt)
       ..writeByte(8)
-      ..write(obj.productcount);
+      ..write(obj.productcount)
+      ..writeByte(9)
+      ..write(obj.isFavorites);
   }
 
   @override
@@ -59,7 +62,7 @@ class CartModelAdapter extends TypeAdapter<CartModel> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is CartModelAdapter &&
+      other is ProductHiveModelAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }

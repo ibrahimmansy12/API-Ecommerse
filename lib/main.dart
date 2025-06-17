@@ -15,9 +15,10 @@ void main() async {
   await Hive.initFlutter();
 
   Bloc.observer = AddBlocObserver();
-  Hive.registerAdapter(CartModelAdapter());
+  Hive.registerAdapter(ProductHiveModelAdapter());
 
-  await Hive.openBox<CartModel>(cartBox);
+  cartBoxbox = await Hive.openBox<ProductHiveModel>(cartBox);
+  favoritestBoxbox = await Hive.openBox<ProductHiveModel>(favoritestBox);
 
   runApp(Ecommerse(
     approuting: MyAppRouter(),

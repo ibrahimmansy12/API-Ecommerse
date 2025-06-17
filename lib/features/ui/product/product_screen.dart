@@ -1,12 +1,11 @@
 // features/ui/product/product_screen.dart
 import 'package:apiecommerse/core/theming/colors_manager.dart';
-import 'package:apiecommerse/core/theming/text_style.dart';
-import 'package:apiecommerse/core/widgets/app_text_button.dart';
+import 'package:apiecommerse/features/data/cart/data/cart_model.dart';
 import 'package:apiecommerse/features/data/home/data/model/prudact_model.dart';
 import 'package:apiecommerse/features/ui/product/widgets/build_sliver_app_bar.dart';
 import 'package:apiecommerse/features/ui/product/widgets/lower_content_container.dart';
+import 'package:apiecommerse/features/ui/product/widgets/product_button.dart';
 import 'package:flutter/material.dart';
-import 'package:sizer/sizer.dart';
 
 class ProductScreen extends StatelessWidget {
   const ProductScreen({super.key, this.productDataDetails});
@@ -14,32 +13,21 @@ class ProductScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ProductHiveModel cartModel = ProductHiveModel(
+      id: productDataDetails?.id,
+      name: productDataDetails?.name,
+      price: productDataDetails?.price,
+      image: productDataDetails?.image,
+      description: productDataDetails?.description,
+    );
     return Scaffold(
       backgroundColor: MyColorsManager.white,
       body: SafeArea(
         child: SizedBox.expand(
           child: Stack(children: [
-            upperPart(context, productDataDetails),
+            UpperPart(productDataDetails:  productDataDetails),
             lowerContentContainer(productDataDetails),
-            Positioned(
-                // height: 20.h,30
-                top: 83.h,
-                right: 8.w,
-                left: 8.w,
-                bottom: 6.h,
-                child: MyTextButton(
-                  backGroundColor: MyColorsManager.black,
-                  buttonhight: 6.h,
-                  borderRadius: 2.h,
-                  buttonText: "Add to Bag",
-                  // buttonwidth: 90.w,
-                  textStyle: MyTextStyles.font20blackBold.copyWith(
-                    color: Colors.white,
-                  ),
-                  onpressed: () {
-                    print("Add to Bag pressed");
-                  },
-                ))
+            productButton(cartModel, context)
           ]),
         ),
       ),

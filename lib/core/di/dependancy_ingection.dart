@@ -3,8 +3,10 @@
 import 'package:apiecommerse/core/networking/api_service.dart';
 import 'package:apiecommerse/core/networking/dio_factory.dart';
 import 'package:apiecommerse/features/data/home/data/repo/home_repo.dart';
+import 'package:apiecommerse/features/logic/cart/cart_cubit.dart';
 import 'package:apiecommerse/features/logic/categories%20and%20products/logic/categories/home_categorys_cubit.dart';
 import 'package:apiecommerse/features/logic/categories%20and%20products/logic/products/home_cubit.dart';
+import 'package:apiecommerse/features/logic/favorites/favorites_cubit.dart';
 import 'package:apiecommerse/features/logic/main/logic/main_cubit.dart';
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
@@ -23,6 +25,8 @@ Future<void> detupGetit() async {
 
 
   getIt.registerFactory<MainCubit>(() => MainCubit());
+  getIt.registerLazySingleton<CartCubit>(() => CartCubit());
+  getIt.registerLazySingleton<FavoritesCubit>(() => FavoritesCubit());
 
 //   //signup
 //   getIt.registerLazySingleton<SignupRepo>(() => SignupRepo(getIt()));

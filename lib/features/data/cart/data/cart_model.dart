@@ -1,22 +1,21 @@
-// features/cart/data/cart_model.dart
+// features/data/cart/data/cart_model.dart
 import 'package:hive_flutter/adapters.dart';
 
 part 'cart_model.g.dart';
 
-
 @HiveType(typeId: 0)
-class CartModel extends HiveObject {
-  CartModel({
-    this.id,
-    this.name,
-    this.description,
-    this.price,
-    this.categoryId,
-    this.image,
-    this.createdAt,
-    this.updatedAt,
-    this.productcount
-  });
+class ProductHiveModel extends HiveObject {
+  ProductHiveModel(
+      {this.id,
+      this.name,
+      this.description,
+      this.price,
+      this.categoryId,
+      this.image,
+      this.createdAt,
+      this.updatedAt,
+      this.productcount,
+      this.isFavorites});
   @HiveField(0)
   int? id;
   @HiveField(1)
@@ -33,6 +32,8 @@ class CartModel extends HiveObject {
   String? createdAt;
   @HiveField(7)
   String? updatedAt;
-   @HiveField(8)
-  int? productcount;
+  @HiveField(8)
+  int? productcount = 0;
+  @HiveField(9)
+  bool? isFavorites = false;
 }

@@ -28,7 +28,6 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
             height: double.infinity,
             child: BlocProvider.value(
                 value: getIt<HomeCubit>()..getCategoriesList(),
-             
                 child: HomeStack(tabController: homeTabController))));
   }
 }

@@ -13,51 +13,67 @@ class HomeCubit extends Cubit<HomeState> {
   List<ProductDataDetails> allProductsList = [];
   List<ProductDataDetails> electronicsProductsList = [];
   List<ProductDataDetails> makeupProductsList = [];
-  
-  
+
   List<CategoriesDatadetails>? categoriesDataList;
 
-
-
   void getCategoriesList() async {
-  //  emit(HomeState.categoriesLoading());
+    //  emit(HomeState.categoriesLoading());
 
     final response = await homeRepo?.getCategories();
     response?.when(success: (productsmodel) {
-      print(
-          "cat cu repo============>>>> ${productsmodel.categoriesDatadetails?[1].toString()}");
-
       categoriesDataList = productsmodel.categoriesDatadetails ?? [];
-     emit(HomeState.categoriesSuccess(categoriesDataList));
+      emit(HomeState.categoriesSuccess(categoriesDataList));
     }, failure: (error) {
       emit(HomeState.categoriesError(error));
     });
   }
+
   void getAllProductsList() async {
     final response = await homeRepo?.getAllProducts();
     emit(HomeState.productLoading());
     response?.when(success: (productsmodel) {
       allProductsList = productsmodel.productDataDetails ?? [];
-    makeupProductsList=  fillProductsList( 2);
-    electronicsProductsList=  fillProductsList( 3);
-print("makeupProductsList============>>>> ${makeupProductsList.toString()}");
-      print("electronicsProductsList============>>>> ${electronicsProductsList.toString()}");
+      makeupProductsList = fillProductsList(2);
+      electronicsProductsList = fillProductsList(3);
       emit(HomeState.productSuccess(allProductsList));
     }, failure: (error) {
-            print("pro cu error============>>>> ${error.toString()}");
-
       emit(HomeState.productError(error));
     });
   }
-
- List<ProductDataDetails>  fillProductsList( int categoryId) {
-   List<ProductDataDetails> products=
-        allProductsList
-            .where((element) => element.categoryId == categoryId)
-            .toList();
-return products;
+ 
+  List<ProductDataDetails> fillProductsList(int categoryId) {
+    List<ProductDataDetails> products = allProductsList
+        .where((element) => element.categoryId == categoryId)
+        .toList();
+    return products;
   }
+}
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    // print("list ======================>>>>> ${productsDataList.toString()}");
+
+     // print("list error ======================>>>>>${error.toString()}");
+     // print("list ======================>>>>> ${productsDataList.toString()}");
+     // print("list ======================>>>>> ${productsDataList.toString()}");
+       //   print("list response ======================>>>>> ${response}");
   // void getMakeupProducts() async {
   //   final response = await homeRepo?.getProductsById(2);
   //   emit(HomeState.categoriesLoading());
@@ -84,10 +100,3 @@ return products;
   //   final response = await homeRepo?.addToFavorite(favoriteRequestModel);
   //   response?.when(success: (productsmodel) {}, failure: (error) {});
   // }
-}
-    // print("list ======================>>>>> ${productsDataList.toString()}");
-
-     // print("list error ======================>>>>>${error.toString()}");
-     // print("list ======================>>>>> ${productsDataList.toString()}");
-     // print("list ======================>>>>> ${productsDataList.toString()}");
-       //   print("list response ======================>>>>> ${response}");

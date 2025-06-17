@@ -1,8 +1,12 @@
 // features/ui/main/ui/main_screen.dart
+import 'package:apiecommerse/core/di/dependancy_ingection.dart';
+import 'package:apiecommerse/features/logic/cart/cart_cubit.dart';
+import 'package:apiecommerse/features/logic/favorites/favorites_cubit.dart';
 import 'package:apiecommerse/features/logic/main/logic/main_cubit.dart';
 import 'package:apiecommerse/features/logic/main/logic/main_state.dart';
 import 'package:apiecommerse/features/ui/cart/ui/cart_screen.dart';
 import 'package:apiecommerse/features/ui/home/ui/home_screen.dart';
+import 'package:apiecommerse/features/ui/love/ui/favorites_screen.dart';
 import 'package:apiecommerse/features/ui/main/ui/widgets/bottom_navigation_bar.dart';
 import 'package:apiecommerse/features/ui/product/product_screen.dart';
 import 'package:apiecommerse/features/ui/search/ui/search_screen.dart';
@@ -43,8 +47,14 @@ class _MainScreenState extends State<MainScreen> {
 List<Widget> pageList = [
   HomeScreen(),
   SearchScreen(),
-  HomeScreen(),
-  CartScreen(),
+  BlocProvider.value(
+    value: getIt<FavoritesCubit>(),
+    child: FavoritesScreen(),
+  ),
+  BlocProvider.value(
+    value: getIt<CartCubit>(),
+    child: CartScreen(),
+  ),
   ProductScreen(),
 ];
 

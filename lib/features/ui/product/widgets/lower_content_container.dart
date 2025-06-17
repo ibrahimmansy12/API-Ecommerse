@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:sizer/sizer.dart';
 
-
+ 
 Positioned lowerContentContainer(ProductDataDetails? productDataDetails) {
   return Positioned(
     left: 0,

@@ -11,6 +11,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sizer/sizer.dart';
 
+import '../../../../logic/cart/cart_cubit.dart';
+
 class HomeTapBarView extends StatefulWidget {
   const HomeTapBarView({
     super.key,
@@ -46,12 +48,15 @@ class _HomeTapBarViewState extends State<HomeTapBarView> {
                 );
               },
               productSuccess: (productData) {
-                return productRebuildMethod(context);
+                return BlocProvider.value(
+            value:getIt<CartCubit>(),
+            child: productRebuildMethod(context),
+                );
               },
               productError: (error) {
                 return Center(
                   child: Text(
-                    'Error: $error',
+                    'Error: ',
                     style: MyTextStyles.font20blackSemiBold,
                   ),
                 );
@@ -62,7 +67,7 @@ class _HomeTapBarViewState extends State<HomeTapBarView> {
               categoriesError: (error) {
                 return Center(
                   child: Text(
-                    'Error: $error',
+                    'Error: ',
                     style: MyTextStyles.font20blackSemiBold,
                   ),
                 );

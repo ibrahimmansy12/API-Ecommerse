@@ -1,0 +1,92 @@
+// features/logic/cart/cart_cubit.dart
+import 'package:apiecommerse/core/helper/constance_helper.dart';
+import 'package:apiecommerse/features/data/cart/data/cart_model.dart';
+import 'package:apiecommerse/features/logic/cart/cart_state.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hive/hive.dart';
+
+class CartCubit extends Cubit<CartState> {
+  CartCubit() : super(CartState.initial());
+
+  List<ProductHiveModel> cartProductsList = [];
+
+  addProductToCart(ProductHiveModel cartModel) async {
+    cartModel.productcount = cartModel.productcount ?? 1;
+    emit(CartState.loading());
+    try {
+      var productBox = Hive.box<ProductHiveModel>(cartBox);
+      await productBox.add(cartModel);
+      print("Product added to cart: ${cartModel.name}");
+      print("=====> Product list cart is: ${cartProductsList.length}");
+      emit(CartState.success(cartmodellist: cartProductsList));
+    } on Exception catch (e) {
+      print("Error adding product to cart: $e");
+      emit(CartState.error());
+    }
+  }
+
+//  
+  saveProductChanges(ProductHiveModel cartModel) async {
+    emit(CartState.loading());
+    try {
+      cartModel.save();
+      print("=====> Product count is: ${cartModel.productcount}");
+
+      emit(CartState.putsuccess(
+          cartmodel: cartModel, cartmodellist: cartProductsList));
+    } on Exception catch (e) {
+      print("Error adding product to cart: $e");
+      emit(CartState.error());
+    }
+  }
+
+
+
+  getCartproducts() {
+    var productBox = Hive.box<ProductHiveModel>(cartBox);
+
+    cartProductsList = productBox.values.toList();
+    print("=====> Product list cart is: ${cartProductsList.length}");
+
+    emit(CartState.success(cartmodellist: cartProductsList));
+  }
+}
+ // List<ProductHiveModel> favoriteProductsList = [];
+//       var favoritBox = Hive.box<ProductHiveModel>(favoritestBox);
+//   putToFavorite(ProductHiveModel cartModel) async {
+//     // cartModel.productcount = cartModel.productcount ?? 1;
+//     emit(CartState.loading());
+//     try {
+//       await favoritBox.put(cartModel.id, cartModel);
+// // favoritBox.values.contains(cartModel);
+//       getfavoritesproducts();
+//       print("Product put to cart: ${cartModel.name}");
+//       print("=====> FAvorite list cart is: ${favoriteProductsList.length}");
+
+//       emit(CartState.success(cartmodellist: favoriteProductsList));
+//     } on Exception catch (e) {
+//       print("Error adding product to cart: $e");
+//       emit(CartState.error());
+//     }
+//   }
+//  getfavoritesproducts() {
+//     var productBox = Hive.box<ProductHiveModel>(favoritestBox);
+
+//     favoriteProductsList = productBox.values.toList();
+//     print("=====> Product list cart is: ${cartProductsList.length}");
+
+//     emit(CartState.success(cartmodellist: favoriteProductsList));
+//   }
+  // putToFavorites(ProductHiveModel cartModel) async {
+  //   emit(CartState.loading());
+  //   try {
+  //     cartModel.save();
+  //     print("=====> Product count is: ${cartModel.productcount}");
+
+  //     emit(CartState.putsuccess(
+  //         cartmodel: cartModel, cartmodellist: cartProductsList));
+  //   } on Exception catch (e) {
+  //     print("Error adding product to cart: $e");
+  //     emit(CartState.error());
+  //   }
+  // }
