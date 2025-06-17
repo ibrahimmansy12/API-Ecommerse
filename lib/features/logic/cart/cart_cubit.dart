@@ -9,6 +9,7 @@ class CartCubit extends Cubit<CartState> {
   CartCubit() : super(CartState.initial());
 
   List<ProductHiveModel> cartProductsList = [];
+  List cartProductsIds = [];
 
   addProductToCart(ProductHiveModel cartModel) async {
     cartModel.productcount = cartModel.productcount ?? 1;
@@ -43,6 +44,7 @@ class CartCubit extends Cubit<CartState> {
 
 
   getCartproducts() {
+    cartProductsIds=getCartIdies(cartProductsList);
     var productBox = Hive.box<ProductHiveModel>(cartBox);
 
     cartProductsList = productBox.values.toList();
@@ -51,6 +53,12 @@ class CartCubit extends Cubit<CartState> {
     emit(CartState.success(cartmodellist: cartProductsList));
   }
 }
+List getCartIdies(List cartProductsList) {
+   return   cartProductsList = cartProductsList.map((e) {
+        cartProductsList.contains(e);
+        return e.id;
+      }).toList();
+    }
  // List<ProductHiveModel> favoriteProductsList = [];
 //       var favoritBox = Hive.box<ProductHiveModel>(favoritestBox);
 //   putToFavorite(ProductHiveModel cartModel) async {

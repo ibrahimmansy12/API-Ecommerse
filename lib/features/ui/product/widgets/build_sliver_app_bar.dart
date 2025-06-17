@@ -3,7 +3,6 @@
 import 'package:apiecommerse/core/theming/colors_manager.dart';
 import 'package:apiecommerse/features/data/home/data/model/prudact_model.dart';
 import 'package:apiecommerse/features/logic/favorites/favorites_cubit.dart';
-import 'package:apiecommerse/features/ui/home/ui/widgets/product_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ionicons/ionicons.dart';
@@ -11,6 +10,7 @@ import 'package:sizer/sizer.dart';
 
 import '../../../../core/di/dependancy_ingection.dart';
 import '../../../data/cart/data/cart_model.dart';
+import '../../favorites/ui/widget/favorites_icon.dart';
 
 class UpperPart extends StatelessWidget {
   const UpperPart({super.key, this.productDataDetails});

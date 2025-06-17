@@ -1,7 +1,6 @@
 // features/logic/favorites/favorites_cubit.dart
 import 'package:apiecommerse/features/logic/favorites/favorites_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hive_flutter/adapters.dart';
 
 import '../../../core/helper/constance_helper.dart';

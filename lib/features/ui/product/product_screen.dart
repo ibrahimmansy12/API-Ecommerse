@@ -25,9 +25,9 @@ class ProductScreen extends StatelessWidget {
       body: SafeArea(
         child: SizedBox.expand(
           child: Stack(children: [
-            UpperPart(productDataDetails:  productDataDetails),
+            UpperPart(productDataDetails: productDataDetails),
             lowerContentContainer(productDataDetails),
-            productButton(cartModel, context)
+            ProductButton(cartModel: cartModel)
           ]),
         ),
       ),

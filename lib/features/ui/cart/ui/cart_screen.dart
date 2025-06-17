@@ -89,7 +89,7 @@ class _CartScreenState extends State<CartScreen> {
       top: 17.h,
       left: 3.w,
       right: 3.w,
-      bottom: 0,
+      bottom: 7.h,
       child: BlocBuilder<CartCubit, CartState>(
         // buildWhen: (previous, current) =>
         //     current is Loading &&
@@ -102,7 +102,9 @@ class _CartScreenState extends State<CartScreen> {
             success: (cartmodelList) {
               return ListView.builder(
                 itemBuilder: (context, index) {
-                  return CartListviewItem(cartModel:  cartmodelList?[index],);
+                  return CartListviewItem(
+                    cartModel: cartmodelList?[index],
+                  );
                 },
                 itemCount: cartmodelList?.length,
               );
@@ -111,7 +113,9 @@ class _CartScreenState extends State<CartScreen> {
             putsuccess: (cartmodelList, cartmodel) {
               return ListView.builder(
                 itemBuilder: (context, index) {
-                  return CartListviewItem(cartModel:  cartmodelList?[index],);
+                  return CartListviewItem(
+                    cartModel: cartmodelList?[index],
+                  );
                 },
                 itemCount: cartmodelList?.length,
               );

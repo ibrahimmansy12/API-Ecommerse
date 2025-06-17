@@ -13,7 +13,7 @@ import 'package:apiecommerse/features/ui/seeAll/ui/see_all_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../features/ui/love/ui/favorites_screen.dart';
+import '../../features/ui/favorites/ui/favorites_screen.dart';
 
 class MyAppRouter {
   Route? generateRouter(RouteSettings settings) {

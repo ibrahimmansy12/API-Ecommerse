@@ -6,7 +6,7 @@ import 'package:apiecommerse/features/logic/main/logic/main_cubit.dart';
 import 'package:apiecommerse/features/logic/main/logic/main_state.dart';
 import 'package:apiecommerse/features/ui/cart/ui/cart_screen.dart';
 import 'package:apiecommerse/features/ui/home/ui/home_screen.dart';
-import 'package:apiecommerse/features/ui/love/ui/favorites_screen.dart';
+import 'package:apiecommerse/features/ui/favorites/ui/favorites_screen.dart';
 import 'package:apiecommerse/features/ui/main/ui/widgets/bottom_navigation_bar.dart';
 import 'package:apiecommerse/features/ui/product/product_screen.dart';
 import 'package:apiecommerse/features/ui/search/ui/search_screen.dart';
