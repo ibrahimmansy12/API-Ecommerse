@@ -9,6 +9,8 @@ import 'package:apiecommerse/features/logic/categories%20and%20products/logic/ca
 import 'package:apiecommerse/features/logic/categories%20and%20products/logic/products/home_cubit.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../data/home/data/model/categories_model.dart';
+
 // import 'package:flutter_bloc/flutter_bloc.dart';
 Widget homeTapBardetailsMethod(
     BuildContext context, TabController? controller) {
@@ -43,16 +45,17 @@ Widget homeTapBardetailsMethod(
 }
 
 Widget stackTapBardetailsMethod(
-  BuildContext context,
+  BuildContext context,List<CategoriesDatadetails>? categoriesDataList
+
 ) {
   // var inject = BlocProvider.of<HomeCategorysCubit>(context);
-  var inject = getIt<HomeCategorysCubit>();
-  print("=====>>>>${inject.categoriesDataList?[0].name}");
-  if (inject.categoriesDataList.isNullOrEmpty()) {
-    return Center(
-      child: CircularProgressIndicator(),
-    );
-  }
+  // var inject = getIt<HomeCategorysCubit>();
+  print("=====>>>>${categoriesDataList?[0].name}");
+  // if (inject.categoriesDataList.isNullOrEmpty()) {
+  //   return Center(
+  //     child: CircularProgressIndicator(),
+  //   );
+  // }
   return TabBar(
     indicatorSize: TabBarIndicatorSize.label,
     indicatorColor: Colors.amber,
@@ -66,10 +69,10 @@ Widget stackTapBardetailsMethod(
     dividerHeight: 0,
     tabs: [
       Tab(
-        text: inject.categoriesDataList?[0].name ?? "111",
+        text: categoriesDataList?[0].name ?? "111",
       ),
       Tab(
-        text: inject.categoriesDataList?[1].name ?? "222",
+        text: categoriesDataList?[1].name ?? "222",
       ),
       // Tab(
       //   text: inject.categoriesDataList?[2].name ?? "333",

@@ -26,18 +26,25 @@ class MyAppRouter {
                 lazy: false,
                 create: (context) => MainCubit(),
               ),
-             BlocProvider.value(
-    value: getIt<FavoritesCubit>()..getfavoritesproducts(),
-    child: FavoritesScreen(),
-  ),
+              BlocProvider.value(
+                value: getIt<FavoritesCubit>()..getfavoritesproducts(),
+                child: FavoritesScreen(),
+              ),
             ],
             child: MainScreen(),
           ),
         );
       case ERouts.seeallscreen:
         return MaterialPageRoute(
-          builder: (context) => BlocProvider.value(
-            value: getIt<HomeCubit>(),
+          builder: (context) => MultiBlocProvider(
+            providers: [
+              BlocProvider.value(
+                value: getIt<HomeCubit>(),
+              ),
+              BlocProvider.value(
+                value: getIt<FavoritesCubit>()..getfavoritesproducts(),
+              ),
+            ],
             child: SeeAllScreen(
               categoriesDataList: getIt<HomeCubit>().categoriesDataList ?? [],
             ),

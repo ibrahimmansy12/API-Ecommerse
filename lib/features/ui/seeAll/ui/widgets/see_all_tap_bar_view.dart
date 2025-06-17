@@ -40,7 +40,9 @@ class SeeAllTapBarView extends StatelessWidget {
             );
           },
           productSuccess: (productData) {
-            return seeAllTapBarViewMethod(context,);
+            return seeAllTapBarViewMethod(
+              context,
+            );
           },
           productError: (error) {
             return Center(
@@ -58,7 +60,9 @@ class SeeAllTapBarView extends StatelessWidget {
             );
           },
           categoriesSuccess: (productData) {
-            return seeAllTapBarViewMethod(context, );
+            return seeAllTapBarViewMethod(
+              context,
+            );
           },
           categoriesError: (error) {
             return Center(
@@ -80,21 +84,27 @@ class SeeAllTapBarView extends StatelessWidget {
     );
   }
 
-  TabBarView seeAllTapBarViewMethod(
-      BuildContext context, ) {
-      var inject = getIt<HomeCubit>();
-    return TabBarView(
-      controller: seeAllTabController,
-      children: [
-        SeeAllTapBarViewColumn(productsCategoryDataList: inject.makeupProductsList,
-            ),
-        SeeAllTapBarViewColumn(productsCategoryDataList: inject.electronicsProductsList,
+  Widget seeAllTapBarViewMethod(
+    BuildContext context,
+  ) {
+    var inject = getIt<HomeCubit>();
+    return Hero(
+      tag: "productCardListview",
+      child: TabBarView(
+        controller: seeAllTabController,
+        children: [
+          SeeAllTapBarViewColumn(
+            productsCategoryDataList: inject.makeupProductsList,
+          ),
+          SeeAllTapBarViewColumn(
+            productsCategoryDataList: inject.electronicsProductsList,
             // productDataList: inject.productsCategoryDataList,
-            ),
-        // SeeAllTapBarViewColumn(
-        //     // productDataList:inject.productsCategoryDataList,
-        //     ),
-      ],
+          ),
+          // SeeAllTapBarViewColumn(
+          //     // productDataList:inject.productsCategoryDataList,
+          //     ),
+        ],
+      ),
     );
   }
 }

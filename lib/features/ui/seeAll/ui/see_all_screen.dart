@@ -6,7 +6,8 @@ import 'package:flutter/material.dart';
 
 class SeeAllScreen extends StatefulWidget {
   const SeeAllScreen({
-    super.key,required this.categoriesDataList,
+    super.key,
+    required this.categoriesDataList,
   });
   final List<CategoriesDatadetails>? categoriesDataList;
   @override
@@ -18,7 +19,7 @@ class _SeeAllScreenState extends State<SeeAllScreen>
   @override
   void initState() {
     seeAllTabController = TabController(length: 2, vsync: this);
-  seeAllTabController?.index = homeTabController!.index;
+    seeAllTabController?.index = homeTabController!.index;
 
     super.initState();
   }
@@ -26,7 +27,7 @@ class _SeeAllScreenState extends State<SeeAllScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: seeAllStack(context,),
+      body: seeAllStack(context, widget.categoriesDataList),
     );
     //   return BlocProvider(
     //     create: (context) => HomeCubit(getIt()),

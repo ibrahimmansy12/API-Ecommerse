@@ -33,42 +33,44 @@ class HomeTapBarViewColumn extends StatelessWidget {
             scrollDirection: Axis.horizontal,
             itemBuilder: (context, index) {
               return ProductCard(
-                
+                top: 1.35.h,
                 productDataDetails: productDataList?[index],
               );
             },
           ),
         ),
-        Column(
-          children: [
-            verticalSpace(2),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  "Latest ",
-                  style: MyTextStyles.font20blackSemiBold,
-                ),
-                GestureDetector(
-                  onTap: () {
-                    context.pushNamed(ERouts.seeallscreen);
-                  },
-                  child: Row(
-                    children: [
-                      
-                      Text(
-                        "See All",
-                        style: MyTextStyles.font18blackSemiBold,
-                      ),
-                      Icon(AntIcons.caretRightFilled)
-                    ],
+        Hero(
+          tag: "productCardListview",
+          child: Column(
+            children: [
+              verticalSpace(2),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    "Latest ",
+                    style: MyTextStyles.font20blackSemiBold,
                   ),
-                ),
-              ],
-            ),
-            verticalSpace(1.3),
-            Latest(productDataList: productDataList!.reversed.toList()),
-          ],
+                  GestureDetector(
+                    onTap: () {
+                      context.pushNamed(ERouts.seeallscreen);
+                    },
+                    child: Row(
+                      children: [
+                        Text(
+                          "See All",
+                          style: MyTextStyles.font18blackSemiBold,
+                        ),
+                        Icon(AntIcons.caretRightFilled)
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+              verticalSpace(1.3),
+              Latest(productDataList: productDataList!.reversed.toList()),
+            ],
+          ),
         )
       ],
     );

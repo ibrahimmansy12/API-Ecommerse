@@ -23,14 +23,18 @@ class SeeAllTapBarViewColumn extends StatelessWidget {
       scrollDirection: Axis.vertical,
       staggeredTileBuilder: (int index) => StaggeredTile.extent(
           (index % 2 == 0) ? 1 : 1,
-          (index % 4 == 1 || index % 4 == 3) ? 45.h : 40.h),
+          (index % 4 == 1 || index % 4 == 3) ? 42.h : 36.h),
       itemCount: (productsCategoryDataList?.length ?? 0) >= 0
           ? productsCategoryDataList?.length
           : 2,
       itemBuilder: (context, index) {
         return ProductCard(
-          height: 30.h,
-          width: 60.w,
+          topDescriptionPosi: 18.h,
+          iconSize: 17.sp,
+          right: index % 2 == 0 ? 1.2.w : 1.w,
+          top: index % 2 == 0 ? 0.53.h : 0.5.h,
+          // height: 30.h,
+          // width: 60.w,
           productDataDetails: productsCategoryDataList?[index],
         );
       },

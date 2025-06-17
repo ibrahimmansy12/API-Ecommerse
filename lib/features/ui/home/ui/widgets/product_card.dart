@@ -8,8 +8,11 @@ import 'package:apiecommerse/core/theming/text_style.dart';
 import 'package:apiecommerse/features/data/cart/data/cart_model.dart';
 import 'package:apiecommerse/features/data/home/data/model/prudact_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sizer/sizer.dart';
 
+import '../../../../../core/di/dependancy_ingection.dart';
+import '../../../../logic/favorites/favorites_cubit.dart';
 import '../../../favorites/ui/widget/favorites_icon.dart';
 
 class ProductCard extends StatelessWidget {
@@ -18,10 +21,19 @@ class ProductCard extends StatelessWidget {
     this.height,
     this.width,
     this.productDataDetails,
+    this.right,
+    this.top,
+    this.iconSize,
+    this.topDescriptionPosi,
   });
   final double? height;
   final double? width;
   final ProductDataDetails? productDataDetails;
+  final double? right;
+  final double? top;
+  final double? iconSize;
+  final double? topDescriptionPosi;
+
   @override
   Widget build(BuildContext context) {
     ProductHiveModel? productHiveModel = ProductHiveModel(
@@ -32,36 +44,44 @@ class ProductCard extends StatelessWidget {
       image: productDataDetails?.image ?? "",
       isFavorites: false,
     );
-    return Hero(
-      tag: productDataDetails?.id ?? "productCard",
-      child: GestureDetector(
-        onTap: () {
-          context.pushNamed(ERouts.productScreen,
-              arguments: productDataDetails);
-          // Navigator.push(
-          //     context,
-          //     MaterialPageRoute(
-          //       builder: (context) => ProductScreen(
-          //         productDataDetails: productDataDetails,
-          //       ),
-          //     ));
-        },
-        child: Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(2.w),
-            color: MyColorsManager.white,
-          ),
-          padding: EdgeInsets.all(0.w),
-          margin: EdgeInsets.all(1.2.w),
-          height: height ?? 40.h,
-          width: width ?? 60.w,
-          child: Stack(
-            children: [
-              CardImage(productDataList: productDataDetails),
-              CardDescription(productDataList: productDataDetails),
-              FavoriteIcon(productHiveModel: productHiveModel)
-            ],
-          ),
+    return GestureDetector(
+      onTap: () {
+        context.pushNamed(ERouts.productScreen,
+            arguments: productDataDetails);
+        // Navigator.push(
+        //     context,
+        //     MaterialPageRoute(
+        //       builder: (context) => ProductScreen(
+        //         productDataDetails: productDataDetails,
+        //       ),
+        //     ));
+      },
+      child: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(2.w),
+          color: MyColorsManager.white,
+        ),
+        padding: EdgeInsets.all(0.w),
+        margin: EdgeInsets.all(1.2.w),
+        height: height ?? 40.h,
+        width: width ?? 60.w,
+        child: Stack(
+          children: [
+            CardImage(productDataList: productDataDetails),
+            CardDescription(
+              productDataList: productDataDetails,
+              topDescriptionPosi: topDescriptionPosi,
+            ),
+            BlocProvider.value(
+              value: getIt<FavoritesCubit>()..getfavoritesproducts(),
+              child: FavoriteIcon(
+                productHiveModel: productHiveModel,
+                right: right,
+                top: top,
+                iconsSize: iconSize,
+              ),
+            )
+          ],
         ),
       ),
     );
@@ -72,20 +92,21 @@ class CardDescription extends StatelessWidget {
   const CardDescription({
     super.key,
     this.productDataList,
+    this.topDescriptionPosi,
   });
+  final double? topDescriptionPosi;
   final ProductDataDetails? productDataList;
   @override
   Widget build(BuildContext context) {
     return Positioned(
-        top: 22.h,
-        bottom: 2.w,
+        top: topDescriptionPosi ?? 23.h,
+        bottom: 1.w,
         right: 2.w,
         left: 2.w,
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          //  mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Spacer(),
             Text(
               productDataList?.name ?? "UltraBoost\nShoes",
               maxLines: 2,
@@ -96,6 +117,7 @@ class CardDescription extends StatelessWidget {
                 color: MyColorsManager.black,
               ),
             ),
+            Spacer(),
             Text(
               productDataList?.description ?? "Men's Running",
               overflow: TextOverflow.ellipsis,
@@ -103,6 +125,8 @@ class CardDescription extends StatelessWidget {
               style: MyTextStyles.font16blackSemiBold
                   .copyWith(fontSize: 17.sp, color: MyColorsManager.grey),
             ),
+            Spacer(),
+            Spacer(),
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
@@ -120,7 +144,6 @@ class CardDescription extends StatelessWidget {
         ));
   }
 }
-
 
 // Widget homeFavoritesIcon(inject) {
 //     return Positioned(
@@ -150,7 +173,6 @@ class CardImage extends StatelessWidget {
   });
 
   final ProductDataDetails? productDataList;
-
   @override
   Widget build(BuildContext context) {
     final String? imagePath = productDataList?.image;
@@ -172,11 +194,11 @@ class CardImage extends StatelessWidget {
       top: 0.w,
       right: 0.w,
       left: 0.w,
-      bottom: 18.h,
+      // bottom: 21.h,
       child: imageUrl == null
           ? Image.asset(
               "assets/images/download.jpeg",
-              fit: BoxFit.cover,
+              fit: BoxFit.contain,
             )
           : FadeInImage(
               image: NetworkImage(imageUrl),
@@ -185,10 +207,10 @@ class CardImage extends StatelessWidget {
                 print("error is ${error.toString()}");
                 return Image.asset(
                   "assets/images/download.jpeg",
-                  fit: BoxFit.cover,
+                  fit: BoxFit.contain,
                 );
               },
-              fit: BoxFit.cover,
+              fit: BoxFit.contain,
             ),
     );
   }

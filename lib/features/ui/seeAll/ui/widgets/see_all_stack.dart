@@ -10,23 +10,28 @@ import 'package:apiecommerse/features/ui/seeAll/ui/widgets/see_all_tap_bar_view.
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sizer/sizer.dart';
-
+import '../../../../data/home/data/model/categories_model.dart';
 import '../../../../logic/categories and products/logic/categories/home_categorys_cubit.dart';
 import '../../../../logic/categories and products/logic/categories/home_categorys_state.dart';
 
 Widget seeAllStack(
-  BuildContext context,
-) {
+    BuildContext context, List<CategoriesDatadetails>? categoriesDataList) {
   return SizedBox(
-    height: 100.h,
+    height: double.infinity,
     width: double.infinity,
     child: Stack(
       children: [
-        SizedBox(
-          width: double.infinity,
-          child: Image.asset(
-            "assets/images/home back.png",
-            fit: BoxFit.cover,
+        Positioned(
+          top: 0,
+          bottom: 0,
+          right: 0,
+          left: 0,
+          child: SizedBox(
+            width: double.infinity,
+            child: Image.asset(
+              "assets/images/home back.png",
+              fit: BoxFit.cover,
+            ),
           ),
         ),
         Column(
@@ -48,10 +53,10 @@ Widget seeAllStack(
             ),
             Column(
               children: [
-                stackTapBardetailsMethod(context),
+                stackTapBardetailsMethod(context, categoriesDataList),
                 verticalSpace(1),
                 SizedBox(
-                  height: 82.h,
+                  height: 84.5.h,
                   child: BlocProvider.value(
                     value: getIt<HomeCubit>(),
                     child: SeeAllTapBarView(),
@@ -86,7 +91,7 @@ Widget seeAllBlocBuilder() {
         categoriesSuccess: (categoriesDataList) {
           return Column(
             children: [
-              stackTapBardetailsMethod(context),
+              //  stackTapBardetailsMethod(context,categoriesDataList.cast<CategoriesDatadetails>()),
               verticalSpace(1),
               // SizedBox(
               //   height: 82.h,

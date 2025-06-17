@@ -38,9 +38,10 @@ class Latest extends StatelessWidget {
           }
 
           return Container(
-              margin: EdgeInsets.all(3.w),
+              margin: EdgeInsets.all(2.w),
+              // padding: EdgeInsets.all(3.w),
               height: 10.h,
-              width: 28.w,
+              width: 22.w,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(2.w),
                 color: MyColorsManager.white,
@@ -48,7 +49,7 @@ class Latest extends StatelessWidget {
               child: imageUrl == null
                   ? Image.asset(
                       "assets/images/download.jpeg",
-                      fit: BoxFit.cover,
+                      fit: BoxFit.fill,
                     )
                   : FadeInImage(
                       image: NetworkImage(imageUrl),
@@ -57,7 +58,7 @@ class Latest extends StatelessWidget {
                         print("error is ${error.toString()}");
                         return Image.asset(
                           "assets/images/download.jpeg",
-                          fit: BoxFit.cover,
+                          fit: BoxFit.fill,
                         );
                       },
                       fit: BoxFit.cover,
