@@ -13,7 +13,6 @@ import '../../../../../core/theming/colors_manager.dart';
 import '../../../../../core/theming/text_style.dart';
 import '../../../../logic/cart/cart_state.dart';
 
-
 class CartListviewItem extends StatelessWidget {
   const CartListviewItem({
     super.key,
@@ -98,11 +97,11 @@ class CartListviewItem extends StatelessWidget {
                             if (state is PutSuccess &&
                                 state.cartmodel?.id == cartModel?.id) {
                               return Text("$total \$",
-                                  style: MyTextStyles.font18blackSemiBold);
+                                  style: MyTextStyles.font18blackmediume);
                             }
                             return Text(
                               "$total \$",
-                              style: MyTextStyles.font18blackSemiBold,
+                              style: MyTextStyles.font18blackmediume,
                             );
                           },
                         ),

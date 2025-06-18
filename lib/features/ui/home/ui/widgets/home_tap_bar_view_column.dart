@@ -59,7 +59,7 @@ class HomeTapBarViewColumn extends StatelessWidget {
                       children: [
                         Text(
                           "See All",
-                          style: MyTextStyles.font18blackSemiBold,
+                          style: MyTextStyles.font18blackmediume,
                         ),
                         Icon(AntIcons.caretRightFilled)
                       ],

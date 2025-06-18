@@ -1,4 +1,4 @@
-// features/ui/love/ui/favorites_screen.dart
+// features/ui/favorites/ui/favorites_screen.dart
 import 'package:apiecommerse/core/di/dependancy_ingection.dart';
 import 'package:apiecommerse/core/theming/colors_manager.dart';
 import 'package:apiecommerse/core/theming/text_style.dart';
@@ -199,7 +199,7 @@ class FavoriteListViewItem extends StatelessWidget {
                           overflow: TextOverflow.clip,
                         ),
                         Text("${cartModel?.price} \$",
-                            style: MyTextStyles.font18blackSemiBold)
+                            style: MyTextStyles.font18blackmediume)
                         // BlocBuilder<CartCubit, CartState>(
                         //   builder: (context, state) {
 

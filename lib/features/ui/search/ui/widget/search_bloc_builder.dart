@@ -121,7 +121,7 @@ class SearchListviewItem extends StatelessWidget {
                       ),
 
                       Text("${cartModel?.price} \$",
-                          style: MyTextStyles.font18blackSemiBold)
+                          style: MyTextStyles.font18blackmediume)
                       // BlocBuilder<CartCubit, CartState>(
                       //   builder: (context, state) {
                       //     double price =

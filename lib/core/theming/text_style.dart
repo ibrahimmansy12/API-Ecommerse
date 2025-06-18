@@ -27,7 +27,7 @@ class MyTextStyles {
       fontSize: 20.sp,
       fontWeight: MyFontWeighHelper.semiBold,
       color: MyColorsManager.black);
-       static TextStyle font16blackSemiBold = GoogleFonts.poppins(
+  static TextStyle font16blackSemiBold = GoogleFonts.poppins(
       fontSize: 16.sp,
       fontWeight: MyFontWeighHelper.semiBold,
       color: MyColorsManager.black);
@@ -35,9 +35,13 @@ class MyTextStyles {
       fontSize: 20.sp,
       fontWeight: MyFontWeighHelper.bold,
       color: MyColorsManager.black);
-  static TextStyle font18blackSemiBold = GoogleFonts.poppins(
+  static TextStyle font18blackmediume = GoogleFonts.poppins(
       fontSize: 18.sp,
       fontWeight: MyFontWeighHelper.mediume,
+      color: MyColorsManager.black);
+  static TextStyle font18blackLight = GoogleFonts.poppins(
+      fontSize: 18.sp,
+      fontWeight: MyFontWeighHelper.light,
       color: MyColorsManager.black);
   static TextStyle font30darkbluesemBold = TextStyle(
       fontSize: 30.sp,

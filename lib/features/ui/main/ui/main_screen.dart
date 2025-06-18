@@ -10,6 +10,7 @@ import 'package:apiecommerse/features/ui/favorites/ui/favorites_screen.dart';
 import 'package:apiecommerse/features/ui/home/ui/home_screen.dart';
 import 'package:apiecommerse/features/ui/main/ui/widgets/bottom_navigation_bar.dart';
 import 'package:apiecommerse/features/ui/product/product_screen.dart';
+import 'package:apiecommerse/features/ui/user/ui/user_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -60,7 +61,7 @@ List<Widget> pageList = [
     value: getIt<CartCubit>(),
     child: CartScreen(),
   ),
-  ProductScreen(),
+  UserScreen(),
 ];
 
 Widget mainScafould(int index) {
