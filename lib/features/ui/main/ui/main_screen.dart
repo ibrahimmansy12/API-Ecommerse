@@ -4,14 +4,16 @@ import 'package:apiecommerse/features/logic/cart/cart_cubit.dart';
 import 'package:apiecommerse/features/logic/favorites/favorites_cubit.dart';
 import 'package:apiecommerse/features/logic/main/logic/main_cubit.dart';
 import 'package:apiecommerse/features/logic/main/logic/main_state.dart';
+import 'package:apiecommerse/features/logic/search/logic/search_cubit.dart';
 import 'package:apiecommerse/features/ui/cart/ui/cart_screen.dart';
-import 'package:apiecommerse/features/ui/home/ui/home_screen.dart';
 import 'package:apiecommerse/features/ui/favorites/ui/favorites_screen.dart';
+import 'package:apiecommerse/features/ui/home/ui/home_screen.dart';
 import 'package:apiecommerse/features/ui/main/ui/widgets/bottom_navigation_bar.dart';
 import 'package:apiecommerse/features/ui/product/product_screen.dart';
-import 'package:apiecommerse/features/ui/search/ui/search_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../search/ui/search_page.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -46,7 +48,10 @@ class _MainScreenState extends State<MainScreen> {
 
 List<Widget> pageList = [
   HomeScreen(),
-  SearchScreen(),
+  BlocProvider.value(
+    value: getIt<SearchCubit>()..getAllProductsList(),
+    child: SearchScreen(),
+  ),
   BlocProvider.value(
     value: getIt<FavoritesCubit>(),
     child: FavoritesScreen(),

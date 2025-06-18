@@ -55,7 +55,7 @@ class _CartScreenState extends State<CartScreen> {
                   style: MyTextStyles.font26whitesemBold
                       .copyWith(color: MyColorsManager.black, fontSize: 24.sp)),
             ),
-            cartListView(),
+            CartListView(),
             cartButton(),
           ],
         ),
@@ -84,7 +84,18 @@ class _CartScreenState extends State<CartScreen> {
         ));
   }
 
-  Positioned cartListView() {
+  // Positioned cartListView() {
+  //   return CartListView();
+  //}
+}
+
+class CartListView extends StatelessWidget {
+  const CartListView({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
     return Positioned(
       top: 17.h,
       left: 3.w,

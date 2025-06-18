@@ -1,7 +1,7 @@
 // features/ui/home/ui/home_screen.dart
 import 'package:apiecommerse/core/di/dependancy_ingection.dart';
 import 'package:apiecommerse/core/helper/constance_helper.dart';
-import 'package:apiecommerse/features/logic/categories%20and%20products/logic/products/home_cubit.dart';
+import 'package:apiecommerse/features/logic/categories%20and%20products/logic/products/product_cubit.dart';
 import 'package:apiecommerse/features/ui/home/ui/widgets/home_stack.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -27,7 +27,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
         body: SizedBox(
             height: double.infinity,
             child: BlocProvider.value(
-                value: getIt<HomeCubit>()..getCategoriesList(),
+                value: getIt<ProductCubit>()..getCategoriesList(),
                 child: HomeStack(tabController: homeTabController))));
   }
 }

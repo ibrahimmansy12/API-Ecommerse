@@ -1,15 +1,15 @@
 // features/ui/home/ui/widgets/tap_bar_bloc_builder.dart
 
 import 'package:apiecommerse/core/theming/text_style.dart';
-import 'package:apiecommerse/features/logic/categories%20and%20products/logic/products/home_cubit.dart';
-import 'package:apiecommerse/features/logic/categories%20and%20products/logic/products/home_state.dart';
+import 'package:apiecommerse/features/logic/categories%20and%20products/logic/products/product_cubit.dart';
+import 'package:apiecommerse/features/logic/categories%20and%20products/logic/products/product_state.dart';
 import 'package:apiecommerse/features/ui/home/ui/widgets/home_tap_bar_method.dart';
 import 'package:apiecommerse/features/ui/home/ui/widgets/home_tap_bar_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 Widget tapBarBlocBuilder(TabController tabController) {
-  return BlocBuilder<HomeCubit, HomeState>(
+  return BlocBuilder<ProductCubit, ProductState>(
     builder: (context, state) {
       return state.when(
         categoriesError: (apiErrorModel) {
@@ -21,9 +21,7 @@ Widget tapBarBlocBuilder(TabController tabController) {
           );
         },
         categoriesLoading: () {
-          return const Center(
-            child: CircularProgressIndicator()
-          );
+          return const Center(child: CircularProgressIndicator());
         },
         categoriesSuccess: (categoriesDataList) {
           return SingleChildScrollView(
@@ -37,9 +35,7 @@ Widget tapBarBlocBuilder(TabController tabController) {
           );
         },
         productLoading: () {
-          return const Center(
-           child: CircularProgressIndicator()
-          );
+          return const Center(child: CircularProgressIndicator());
         },
         productSuccess: (productsDataList) {
           // You can customize this widget as needed

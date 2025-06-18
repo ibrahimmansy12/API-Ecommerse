@@ -5,8 +5,7 @@ import 'package:apiecommerse/core/helper/constance_helper.dart';
 import 'package:apiecommerse/core/helper/extention.dart';
 import 'package:apiecommerse/core/theming/colors_manager.dart';
 import 'package:apiecommerse/core/theming/text_style.dart';
-import 'package:apiecommerse/features/logic/categories%20and%20products/logic/categories/home_categorys_cubit.dart';
-import 'package:apiecommerse/features/logic/categories%20and%20products/logic/products/home_cubit.dart';
+import 'package:apiecommerse/features/logic/categories%20and%20products/logic/products/product_cubit.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../data/home/data/model/categories_model.dart';
@@ -14,7 +13,7 @@ import '../../../../data/home/data/model/categories_model.dart';
 // import 'package:flutter_bloc/flutter_bloc.dart';
 Widget homeTapBardetailsMethod(
     BuildContext context, TabController? controller) {
-  var inject = getIt<HomeCubit>();
+  var inject = getIt<ProductCubit>();
   print("=====>>>>${inject.categoriesDataList?[0].name}");
   if (inject.categoriesDataList.isNullOrEmpty()) {
     return Center(
@@ -39,15 +38,12 @@ Widget homeTapBardetailsMethod(
       Tab(
         text: inject.categoriesDataList?[1].name ?? "222",
       ),
-      
     ],
   );
 }
 
 Widget stackTapBardetailsMethod(
-  BuildContext context,List<CategoriesDatadetails>? categoriesDataList
-
-) {
+    BuildContext context, List<CategoriesDatadetails>? categoriesDataList) {
   // var inject = BlocProvider.of<HomeCategorysCubit>(context);
   // var inject = getIt<HomeCategorysCubit>();
   print("=====>>>>${categoriesDataList?[0].name}");

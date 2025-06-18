@@ -4,7 +4,7 @@ import 'package:apiecommerse/core/helper/extention.dart';
 import 'package:apiecommerse/core/helper/spacing.dart';
 import 'package:apiecommerse/core/theming/colors_manager.dart';
 import 'package:apiecommerse/core/theming/text_style.dart';
-import 'package:apiecommerse/features/logic/categories%20and%20products/logic/products/home_cubit.dart';
+import 'package:apiecommerse/features/logic/categories%20and%20products/logic/products/product_cubit.dart';
 import 'package:apiecommerse/features/ui/home/ui/widgets/home_tap_bar_method.dart';
 import 'package:apiecommerse/features/ui/seeAll/ui/widgets/see_all_tap_bar_view.dart';
 import 'package:flutter/material.dart';
@@ -58,7 +58,7 @@ Widget seeAllStack(
                 SizedBox(
                   height: 84.5.h,
                   child: BlocProvider.value(
-                    value: getIt<HomeCubit>(),
+                    value: getIt<ProductCubit>(),
                     child: SeeAllTapBarView(),
                   ),
                 ),

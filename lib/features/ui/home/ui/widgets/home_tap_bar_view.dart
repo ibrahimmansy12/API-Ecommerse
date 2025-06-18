@@ -4,8 +4,8 @@ import 'package:apiecommerse/core/di/dependancy_ingection.dart';
 import 'package:apiecommerse/core/helper/constance_helper.dart';
 import 'package:apiecommerse/core/theming/colors_manager.dart';
 import 'package:apiecommerse/core/theming/text_style.dart';
-import 'package:apiecommerse/features/logic/categories%20and%20products/logic/products/home_cubit.dart';
-import 'package:apiecommerse/features/logic/categories%20and%20products/logic/products/home_state.dart';
+import 'package:apiecommerse/features/logic/categories%20and%20products/logic/products/product_cubit.dart';
+import 'package:apiecommerse/features/logic/categories%20and%20products/logic/products/product_state.dart';
 import 'package:apiecommerse/features/ui/home/ui/widgets/home_tap_bar_view_column.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -26,7 +26,7 @@ class HomeTapBarView extends StatefulWidget {
 class _HomeTapBarViewState extends State<HomeTapBarView> {
   @override
   void initState() {
-    getIt<HomeCubit>().getAllProductsList();
+    getIt<ProductCubit>().getAllProductsList();
     super.initState();
   }
 
@@ -37,7 +37,7 @@ class _HomeTapBarViewState extends State<HomeTapBarView> {
       height: 62.h,
       child: SingleChildScrollView(
         physics: const NeverScrollableScrollPhysics(),
-        child: BlocBuilder<HomeCubit, HomeState>(
+        child: BlocBuilder<ProductCubit, ProductState>(
           builder: (context, state) {
             return state.when(
               productLoading: () {
@@ -49,8 +49,8 @@ class _HomeTapBarViewState extends State<HomeTapBarView> {
               },
               productSuccess: (productData) {
                 return BlocProvider.value(
-            value:getIt<CartCubit>(),
-            child: productRebuildMethod(context),
+                  value: getIt<CartCubit>(),
+                  child: productRebuildMethod(context),
                 );
               },
               productError: (error) {
@@ -97,7 +97,7 @@ class _HomeTapBarViewState extends State<HomeTapBarView> {
   Widget productRebuildMethod(
     BuildContext context,
   ) {
-    var inject = getIt<HomeCubit>();
+    var inject = getIt<ProductCubit>();
     // List<CategoriesDataList>? categoriesDataList = inject.categoriesDataList;
     return Container(
       height: 70.h,

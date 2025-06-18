@@ -3,7 +3,7 @@ import 'package:apiecommerse/core/di/dependancy_ingection.dart';
 import 'package:apiecommerse/core/routing/routs.dart';
 import 'package:apiecommerse/features/data/home/data/model/prudact_model.dart';
 import 'package:apiecommerse/features/logic/cart/cart_cubit.dart';
-import 'package:apiecommerse/features/logic/categories%20and%20products/logic/products/home_cubit.dart';
+import 'package:apiecommerse/features/logic/categories%20and%20products/logic/products/product_cubit.dart';
 import 'package:apiecommerse/features/logic/favorites/favorites_cubit.dart';
 import 'package:apiecommerse/features/logic/main/logic/main_cubit.dart';
 import 'package:apiecommerse/features/ui/cart/ui/cart_screen.dart';
@@ -39,14 +39,15 @@ class MyAppRouter {
           builder: (context) => MultiBlocProvider(
             providers: [
               BlocProvider.value(
-                value: getIt<HomeCubit>(),
+                value: getIt<ProductCubit>(),
               ),
               BlocProvider.value(
                 value: getIt<FavoritesCubit>()..getfavoritesproducts(),
               ),
             ],
             child: SeeAllScreen(
-              categoriesDataList: getIt<HomeCubit>().categoriesDataList ?? [],
+              categoriesDataList:
+                  getIt<ProductCubit>().categoriesDataList ?? [],
             ),
           ),
         );
@@ -54,7 +55,7 @@ class MyAppRouter {
         var productDataDetails = settings.arguments as ProductDataDetails;
         return MaterialPageRoute(
           builder: (context) => BlocProvider.value(
-            value: getIt<HomeCubit>(),
+            value: getIt<ProductCubit>(),
             child: ProductScreen(
               productDataDetails: productDataDetails,
             ),

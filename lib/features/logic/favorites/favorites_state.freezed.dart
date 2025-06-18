@@ -734,14 +734,13 @@ class _$PutSuccessImpl implements PutSuccess {
             other is _$PutSuccessImpl &&
             const DeepCollectionEquality()
                 .equals(other._cartmodellist, _cartmodellist) &&
-            const DeepCollectionEquality().equals(other.cartmodel, cartmodel));
+            (identical(other.cartmodel, cartmodel) ||
+                other.cartmodel == cartmodel));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(_cartmodellist),
-      const DeepCollectionEquality().hash(cartmodel));
+  int get hashCode => Object.hash(runtimeType,
+      const DeepCollectionEquality().hash(_cartmodellist), cartmodel);
 
   /// Create a copy of FavoritesState
   /// with the given fields replaced by the non-null parameter values.
