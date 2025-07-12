@@ -31,8 +31,8 @@ class SeeAllTapBarViewColumn extends StatelessWidget {
         return ProductCard(
           topDescriptionPosi: 18.h,
           iconSize: 17.sp,
-          right: index % 2 == 0 ? 1.2.w : 1.w,
-          top: index % 2 == 0 ? 0.53.h : 0.5.h,
+          right: 0.1.w,
+          top: 0.1.h,
           // height: 30.h,
           // width: 60.w,
           productDataDetails: productsCategoryDataList?[index],

@@ -10,15 +10,14 @@ import 'package:apiecommerse/features/ui/seeAll/ui/widgets/see_all_tap_bar_view.
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sizer/sizer.dart';
+
 import '../../../../data/home/data/model/categories_model.dart';
 import '../../../../logic/categories and products/logic/categories/home_categorys_cubit.dart';
 import '../../../../logic/categories and products/logic/categories/home_categorys_state.dart';
 
 Widget seeAllStack(
     BuildContext context, List<CategoriesDatadetails>? categoriesDataList) {
-  return SizedBox(
-    height: double.infinity,
-    width: double.infinity,
+  return SingleChildScrollView(
     child: Stack(
       children: [
         Positioned(

@@ -60,3 +60,5 @@ lib/payment/stripe_keys.dartlib/payment/stripe_keys.dart
 >>>>>>> 9b07b68 (Initial clean commit)
 lib/payment/stripe_keys.dart 
 lib/payment/stripe_keys.dart 
+# Stripe payment keys - actual keys (local only)
+lib/payment/stripe_keys.dart
