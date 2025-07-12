@@ -20,7 +20,7 @@ class ShimmerTabBar extends StatelessWidget {
         children: [
           horezontalSpace(12),
           Container(
-            width: 40.w,
+            width: 30.w,
             height: 5.8.h,
             margin: EdgeInsets.only(right: 4.w),
             decoration: BoxDecoration(
@@ -29,7 +29,7 @@ class ShimmerTabBar extends StatelessWidget {
             ),
           ),
           Container(
-            width: 28.w,
+            width: 34.w,
             height: 5.8.h,
             decoration: BoxDecoration(
               color: Colors.white,

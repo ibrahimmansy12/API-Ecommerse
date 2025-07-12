@@ -1,5 +1,5 @@
 // payment/payment_manager.dart
-import 'package:apiecommerse/payment/stripe_keys.dart';
+import 'package:apiecommerse/payment/stripe_keys_template.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 

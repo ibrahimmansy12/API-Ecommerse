@@ -6,18 +6,19 @@ import 'package:apiecommerse/core/helper/extention.dart';
 import 'package:apiecommerse/core/theming/colors_manager.dart';
 import 'package:apiecommerse/core/theming/text_style.dart';
 import 'package:apiecommerse/features/logic/categories%20and%20products/logic/products/product_cubit.dart';
+import 'package:apiecommerse/features/ui/home/ui/widgets/shimmer/home_shimmer_contents.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../data/home/data/model/categories_model.dart';
 
 // import 'package:flutter_bloc/flutter_bloc.dart';
 Widget homeTapBardetailsMethod(
-    BuildContext context, TabController? controller) {
+    BuildContext context, TabController? controller,List<CategoriesDatadetails?>? categoriesDataList) {
   var inject = getIt<ProductCubit>();
-  print("=====>>>>${inject.categoriesDataList?[0].name}");
-  if (inject.categoriesDataList.isNullOrEmpty()) {
+  print("==ddd===>>>>${inject.categoriesDataList?[0].name}");
+  if (categoriesDataList.isNullOrEmpty()) {
     return Center(
-      child: CircularProgressIndicator(),
+      child:ShimmerTabBar(),
     );
   }
   return TabBar(
@@ -33,10 +34,10 @@ Widget homeTapBardetailsMethod(
     dividerHeight: 0,
     tabs: [
       Tab(
-        text: inject.categoriesDataList?[0].name ?? "111",
+        text:categoriesDataList?[0]?.name ?? "111",
       ),
       Tab(
-        text: inject.categoriesDataList?[1].name ?? "222",
+        text: categoriesDataList?[1]?.name ?? "222",
       ),
     ],
   );

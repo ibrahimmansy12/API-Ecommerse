@@ -40,7 +40,7 @@ class Latest extends StatelessWidget {
           return Container(
               margin: EdgeInsets.all(2.w),
               // padding: EdgeInsets.all(3.w),
-              height: 10.h,
+              height: 16.h,
               width: 22.w,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(2.w),

@@ -15,7 +15,7 @@ class HomeShimmerproduct extends StatefulWidget {
 class _HomeShimmerproductState extends State<HomeShimmerproduct> {
   @override
   void initState() {
-    getIt<ProductCubit>().getAllProductsList();
+   getIt<ProductCubit>().getAllProductsList();
     super.initState();
   }
 

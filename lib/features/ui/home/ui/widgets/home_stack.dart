@@ -31,7 +31,7 @@ final TabController? tabController;
           Text(" The Collection \n  In The Market ",
               style: MyTextStyles.font26whitesemBold),
           //Text(" Collection", style: MyTextStyles.font26whitesemBold),
-          tapBarBlocBuilder(tabController!),
+          HomeTapBarView(controller:  tabController!),
         ])
         // Column(
       ],
