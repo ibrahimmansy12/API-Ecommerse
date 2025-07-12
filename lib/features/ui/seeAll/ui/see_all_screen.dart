@@ -27,7 +27,8 @@ class _SeeAllScreenState extends State<SeeAllScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: seeAllStack(context, widget.categoriesDataList),
+      body: SingleChildScrollView(
+          child: seeAllStack(context, widget.categoriesDataList)),
     );
     //   return BlocProvider(
     //     create: (context) => HomeCubit(getIt()),

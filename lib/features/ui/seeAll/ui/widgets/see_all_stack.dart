@@ -17,56 +17,54 @@ import '../../../../logic/categories and products/logic/categories/home_category
 
 Widget seeAllStack(
     BuildContext context, List<CategoriesDatadetails>? categoriesDataList) {
-  return SingleChildScrollView(
-    child: Stack(
-      children: [
-        Positioned(
-          top: 0,
-          bottom: 0,
-          right: 0,
-          left: 0,
-          child: SizedBox(
-            width: double.infinity,
-            child: Image.asset(
-              "assets/images/home back.png",
-              fit: BoxFit.cover,
-            ),
+  return Stack(
+    children: [
+      Positioned(
+        top: 0,
+        bottom: 0,
+        right: 0,
+        left: 0,
+        child: SizedBox(
+          width: double.infinity,
+          child: Image.asset(
+            "assets/images/home back.png",
+            fit: BoxFit.cover,
           ),
         ),
-        Column(
-          children: [
-            verticalSpace(3),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                IconButton(
-                    onPressed: () {
-                      context.pop();
-                    },
-                    icon: Icon(
-                      Icons.close_sharp,
-                      color: MyColorsManager.white,
-                      size: 4.h,
-                    )),
-              ],
-            ),
-            Column(
-              children: [
-                stackTapBardetailsMethod(context, categoriesDataList),
-                verticalSpace(1),
-                SizedBox(
-                  height: 84.5.h,
-                  child: BlocProvider.value(
-                    value: getIt<ProductCubit>(),
-                    child: SeeAllTapBarView(),
-                  ),
+      ),
+      Column(
+        children: [
+          verticalSpace(3),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              IconButton(
+                  onPressed: () {
+                    context.pop();
+                  },
+                  icon: Icon(
+                    Icons.close_sharp,
+                    color: MyColorsManager.white,
+                    size: 4.h,
+                  )),
+            ],
+          ),
+          Column(
+            children: [
+              stackTapBardetailsMethod(context, categoriesDataList),
+              verticalSpace(1),
+              SizedBox(
+                height: 83.h,
+                child: BlocProvider.value(
+                  value: getIt<ProductCubit>(),
+                  child: SeeAllTapBarView(),
                 ),
-              ],
-            )
-          ],
-        ),
-      ],
-    ),
+              ),
+            ],
+          )
+        ],
+      ),
+    ],
   );
 }
 
