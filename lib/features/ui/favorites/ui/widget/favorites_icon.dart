@@ -47,8 +47,8 @@ class _FavoriteIconState extends State<FavoriteIcon> {
   favoriteIconBody(double? right, double? top, double? iconSize) {
     var inject = getIt<FavoritesCubit>();
     return Positioned(
-        right: right ?? 2.8.w,
-        top: top ?? 0.55.w,
+        right: right ?? 2.5.w,
+        top: top ?? 0.45.h,
         child: IconButton(
             onPressed: () async {
               if (inject.favoritesIdies.contains(widget.productHiveModel?.id)) {

@@ -33,7 +33,8 @@ class HomeTapBarViewColumn extends StatelessWidget {
             scrollDirection: Axis.horizontal,
             itemBuilder: (context, index) {
               return ProductCard(
-                top: 1.35.h,
+                right: 2.w,
+                top: 1.1.h,
                 productDataDetails: productDataList?[index],
               );
             },
